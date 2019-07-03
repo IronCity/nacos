@@ -20,29 +20,31 @@ import com.alibaba.fastjson.JSON;
 import java.util.Map;
 
 /**
- * @author <a href="mailto:zpf.073@gmail.com">nkorange</a>
+ * @author nkorange
  */
 public class BeatInfo {
 
     private int port;
     private String ip;
     private double weight;
-    private String dom;
+    private String serviceName;
     private String cluster;
     private Map<String, String> metadata;
-    private boolean scheduled;
+    private volatile boolean scheduled;
+    private volatile long period;
+    private volatile boolean stopped;
 
     @Override
     public String toString() {
         return JSON.toJSONString(this);
     }
 
-    public String getDom() {
-        return dom;
+    public String getServiceName() {
+        return serviceName;
     }
 
-    public void setDom(String dom) {
-        this.dom = dom;
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
     public String getCluster() {
@@ -91,5 +93,21 @@ public class BeatInfo {
 
     public void setScheduled(boolean scheduled) {
         this.scheduled = scheduled;
+    }
+
+    public long getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(long period) {
+        this.period = period;
+    }
+
+    public boolean isStopped() {
+        return stopped;
+    }
+
+    public void setStopped(boolean stopped) {
+        this.stopped = stopped;
     }
 }
